@@ -3,6 +3,8 @@ package com.stemming;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLEditorKit.Parser;
+
 public class WordOccurrence {
 	
 	Map<String, Integer> dictionary = new HashMap<String, Integer>();
@@ -34,6 +36,13 @@ public class WordOccurrence {
 			System.out.format("%20s%10d", key, dictionary.get(key));
 			System.out.println();
 		}
-		
+	}
+	
+	public Map<String, Integer> processList(String[] words){
+		for (String string : words) {
+			//Convert to lowercase and remove line endings before processing.
+			addEntry(ParserHelper.stripEndings(string.toLowerCase(),ParserHelper.endings));
+		}
+		return getDictionary();
 	}
 }
